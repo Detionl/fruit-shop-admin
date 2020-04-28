@@ -10,7 +10,7 @@
         type="primary"
         icon="el-icon-document"
         @click="handleDownload"
-      >导出 Excel</el-button>
+      >导出</el-button>
     </div>
     <!-- 表格 -->
     <el-card class="box-card" style="padding: 10px;">
@@ -32,6 +32,18 @@
         <el-table-column property="buyNum" label="购买数量" width="130" align="center"></el-table-column>
 
         <el-table-column property="price" label="购买价格" align="center" width="160"></el-table-column>
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <div class="button-container">
+              <el-button
+                size="mini"
+                icon="el-icon-delete"
+                type="danger"
+                @click="handleDelete(scope.row.id)"
+              >删除</el-button>
+            </div>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         @current-change="handleCurrentChange"
@@ -46,7 +58,7 @@
 
 <script>
 import { switchTime } from "../../utils/index";
-import { getOrder } from "@/api/order.js";
+import { getOrder, delOrder } from "@/api/order.js";
 import FilenameOption from "./components/FilenameOption";
 import AutoWidthOption from "./components/AutoWidthOption";
 import BookTypeOption from "./components/BookTypeOption";
@@ -77,6 +89,21 @@ export default {
       console.log("当前页码十多" + val);
       this.queryOrder.skip = val;
       this.fetchData();
+    },
+    handleDelete(_id) {
+      console.log("打印id");
+      console.log(_id);
+      delOrder(_id).then(
+        res => {
+          if (res.code == 200) {
+            this.$message.success("删除用户成功");
+            this.fetchData();
+          }
+        },
+        err => {
+          console.log("err :", err);
+        }
+      );
     },
     fetchData() {
       this.listLoading = true;

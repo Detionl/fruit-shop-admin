@@ -32,3 +32,14 @@ export function getShop(data) {
         }
     })
 }
+
+export function delShop(data) {
+    return request({
+        url: 'product/delShop',
+        method: 'post',
+        data: {
+            shopId: data,
+            ...data
+        }
+    })
+}

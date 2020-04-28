@@ -21,3 +21,14 @@ export function getOrderByTime() {
         }
     })
 }
+
+export function delOrder(data) {
+    return request({
+        url: 'order/delOrder',
+        method: 'post',
+        data: {
+            orderId: data,
+            ...data
+        }
+    })
+}

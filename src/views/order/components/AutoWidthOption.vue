@@ -1,13 +1,9 @@
 <template>
-  <div style="display:inline-block;">
-    <label class="radio-label">单元格是否自适应: </label>
+  <div style="display:inline-block;" class="radio-container">
+    <label class="radio-label">单元格是否自适应:</label>
     <el-radio-group v-model="autoWidth">
-      <el-radio :label="true" border>
-        True
-      </el-radio>
-      <el-radio :label="false" border>
-        False
-      </el-radio>
+      <el-radio :label="true" border>True</el-radio>
+      <el-radio :label="false" border>False</el-radio>
     </el-radio-group>
   </div>
 </template>
@@ -32,3 +28,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.radio-container /deep/ .el-radio {
+  margin-right: 0;
+}
+</style>

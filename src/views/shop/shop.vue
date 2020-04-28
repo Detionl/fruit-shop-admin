@@ -53,6 +53,18 @@
             </div>
           </template>
         </el-table-column>
+        <el-table-column label="操作" align="center" width="100">
+          <template slot-scope="scope">
+            <div class="button-container">
+              <el-button
+                size="mini"
+                icon="el-icon-delete"
+                type="danger"
+                @click="handleDelete(scope.row._id)"
+              >删除</el-button>
+            </div>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         @current-change="handleCurrentChange"
@@ -67,7 +79,7 @@
 
 <script>
 import { getUser, delUser } from "@/api/user.js";
-import { getType, getShop } from "@/api/shop.js";
+import { getType, getShop, delShop } from "@/api/shop.js";
 export default {
   data() {
     return {
@@ -112,6 +124,30 @@ export default {
     },
     setCurrent(row) {
       this.$refs.singleTable.setCurrentRow(row);
+    },
+    handleDelete(_id) {
+      console.log("打印id");
+      console.log(_id);
+      delShop(_id).then(
+        res => {
+          if (res.code == 200) {
+            this.$message.success("删除用户成功");
+            getShop(this.queryShop).then(
+              res => {
+                console.log("api tableData :", res);
+                this.tableData = res.data;
+                this.total = res.total;
+              },
+              err => {
+                console.log("err :", err);
+              }
+            );
+          }
+        },
+        err => {
+          console.log("err :", err);
+        }
+      );
     },
     handleCurrentChange(val) {
       this.currentRow = val;

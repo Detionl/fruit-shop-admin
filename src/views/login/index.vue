@@ -9,7 +9,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">后台管理系统</h3>
+        <h3 class="title">水果商城后台管理系统</h3>
       </div>
 
       <el-form-item prop="username">
@@ -58,7 +58,7 @@
       >登录</el-button>
     </el-form>
     <div class="info" style="bottom: 40px;">Beta: 1.0</div>
-    <div class="info">Technical Support: XXX</div>
+    <div class="info">Technical Support: 广州大学松田学院刘德森</div>
   </div>
 </template>
 
@@ -212,7 +212,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg: #001529;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 
